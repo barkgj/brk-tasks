@@ -1,8 +1,8 @@
 <?php
 
-function brk_tasks_instance_do_start_task_instance($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_start_task_instance($then_that_item, $taskid, $taskinstanceid)
 {
-	$instance = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instance = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instance["state"];
 
 	
@@ -13,11 +13,11 @@ function brk_tasks_instance_do_start_task_instance($then_that_item, $taskid, $ta
 	{
 		$result["console"][] = "STARTING TASK INSTANCE";
 	
-		$assignedtoemployee_id = brk_tasks_gui_getemployeeidcurrentuser();
+		$assignedtoemployee_id = nxs_task_gui_getemployeeidcurrentuser();
 		$action_url = "https://global.nexusthemes.com/api/1/prod/start-task-instance/?nxs=businessprocess-api&nxs_json_output_format=prettyprint&businessprocesstaskid={$taskid}&instance_context={$taskinstanceid}&assignedtoemployee_id={$assignedtoemployee_id}";
 
 		$should_do_it = false;
-		$isheadless = brk_tasks_isheadless();
+		$isheadless = nxs_tasks_isheadless();
 		if ($isheadless)
 		{
 			$should_do_it = true;
@@ -30,7 +30,7 @@ function brk_tasks_instance_do_start_task_instance($then_that_item, $taskid, $ta
 			}
 			else
 			{
-				$assignedtoemployee_id = brk_tasks_gui_getemployeeidcurrentuser();
+				$assignedtoemployee_id = nxs_task_gui_getemployeeidcurrentuser();
 				$action_url = "https://global.nexusthemes.com/api/1/prod/start-task-instance/?nxs=businessprocess-api&nxs_json_output_format=prettyprint&businessprocesstaskid={$taskid}&instance_context={$taskinstanceid}&assignedtoemployee_id={$assignedtoemployee_id}";
 				
 				$lines = array

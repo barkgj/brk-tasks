@@ -1,11 +1,11 @@
 <?php
 
-function brk_tasks_instance_do_pick_sales_context($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_pick_sales_context($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "PICK SALES CONTEXT";
 	$result["console"][] = "-----------";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$course_of_action = $inputparameters["course_of_action"];
@@ -15,7 +15,7 @@ function brk_tasks_instance_do_pick_sales_context($then_that_item, $taskid, $tas
 	}
 	else if ($course_of_action == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_pick_sales_context; PLEASE SELECT course_of_action FIRST :)";
+		$result["console"][] = "nxs_task_instance_do_pick_sales_context; PLEASE SELECT course_of_action FIRST :)";
 	}
 	else if ($course_of_action == "perform_sales")
 	{

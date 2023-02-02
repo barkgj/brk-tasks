@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_render_task_instances_v2($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_render_task_instances_v2($then_that_item, $taskid, $taskinstanceid)
 {
 	$result = array();
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 
 	// $result["console"][] = "<span id='add_task_marker'>add task marker</span";
@@ -89,16 +89,16 @@ function brk_tasks_instance_do_render_task_instances_v2($then_that_item, $taskid
 			),
 		);
 	}
-	$taskinstances_wrap = brk_tasks_searchtaskinstances($search_args);
+	$taskinstances_wrap = nxs_tasks_searchtaskinstances($search_args);
 	$taskinstances = $taskinstances_wrap["taskinstances"];
 	
 	$entries = array();
 	foreach ($taskinstances as $taskinstance)
 	{
 		$taskid = $taskinstance["taskid"];
-		$title = brk_tasks_gettaskstitle($taskid);
+		$title = nxs_tasks_gettaskstitle($taskid);
 		$taskinstanceid = $taskinstance["taskinstanceid"];
-		$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+		$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 		
 		$entry["taskid"] = $taskid;
 		$entry["tasktitle"] = $title;
@@ -153,7 +153,7 @@ function brk_tasks_instance_do_render_task_instances_v2($then_that_item, $taskid
 		
 		
 		$taskid = $entry["taskid"];
-		$processtype_html = brk_tasks_getprocessingtype($taskid);
+		$processtype_html = nxs_tasks_getprocessingtype($taskid);
 		
 		$title = $entry["tasktitle"];
 		$taskinstanceid = $entry["taskinstanceid"];

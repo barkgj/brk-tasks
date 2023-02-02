@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_pull_helpscout($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_pull_helpscout($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "PULLING HELPSCOUT";
 	
-	$inputparameters = brk_tasks_getinstanceinputparameters($taskid, $taskinstanceid);
+	$inputparameters = nxs_task_getinstanceinputparameters($taskid, $taskinstanceid);
 	$helpscoutnumber = $inputparameters["original_helpscoutticketnr"];
 	
 	$interpret_url = "https://global.nexusthemes.com/api/1/prod/interpret-conversation/?nxs=helpscout-api&nxs_json_output_format=prettyprint&helpscoutnumber={$helpscoutnumber}&taskid={$taskid}&taskinstanceid={$taskinstanceid}";
@@ -22,7 +22,7 @@ function brk_tasks_instance_do_pull_helpscout($then_that_item, $taskid, $taskins
 			$encodedval = htmlentities($val);
 			$result["console"][] = "APPENDING INPUTPARAMETER {$encodedkey} {$encodedval}";
 		}
-		brk_tasks_appendinputparameters_for_taskinstance($taskid, $taskinstanceid, $inputparameterstoappend);
+		nxs_tasks_appendinputparameters_for_taskinstance($taskid, $taskinstanceid, $inputparameterstoappend);
 	}
 
 	$result["console"][] = "PULLED HELPSCOUT";

@@ -19,7 +19,7 @@ final class tasks
 {
 	public static function gettaskrecipepath($taskid)
 	{
-		$result = functions::getsitedatafolder() . "/task-recipes/{$taskid}.txt";
+		$result = functions::getsitedatafolder() . "/tasks-recipes/{$taskid}.txt";
 		return $result;
 	}
 

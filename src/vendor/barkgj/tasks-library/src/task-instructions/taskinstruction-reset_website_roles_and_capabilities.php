@@ -1,12 +1,12 @@
 <?php
 
-function brk_tasks_instance_do_reset_website_roles_and_capabilities($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_reset_website_roles_and_capabilities($then_that_item, $taskid, $taskinstanceid)
 {
 	error_log("beep");
 	
 	$result["console"][] = "ABOUT TO RESET WEBSITE ROLES AND CAPABILITIES";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$vpstitle = $inputparameters["vpstitle"];

@@ -1,17 +1,17 @@
 ﻿<?php
 
-function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_set_bulk_parameters($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];
 
   $result = array();
   
-	if (!brk_tasks_isheadless())
+	if (!nxs_tasks_isheadless())
 	{
 		global $nxs_gl_recipe_instruction_pointer;
 		
@@ -54,7 +54,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 			}
 			else if ($set_inputparameter_field == "")
 			{
-				$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; set_inputparameter_field attribute ({$field_attribute}) is empty";
+				$result["nackdetails"] = "nxs_task_instance_do_set_parameter; set_inputparameter_field attribute ({$field_attribute}) is empty";
 		  	$result["result"] = "NACK";
 		  	return $result;
 			}
@@ -83,7 +83,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 			  }
 			  else if ($function == "staticvalue")
 			  {
-			  	//error_log("brk_tasks_instance_do_set_parameter; staticvalue");
+			  	//error_log("nxs_task_instance_do_set_parameter; staticvalue");
 					
 					$value = $then_that_item["value{$iterator_postfix}"];
 					// apply input parameters
@@ -91,11 +91,11 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 		
 					$existing_value = $inputparameters[$set_inputparameter_field];
 					
-			  	if (brk_tasks_isheadless())
+			  	if (nxs_tasks_isheadless())
 					{
 						$result["console"][] = "storing value $value for $set_inputparameter_field";
 						//
-						brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
+						nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
 					}
 					else
 					{
@@ -155,11 +155,11 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					
 					$existing_value = $inputparameters[$set_inputparameter_field];	// for example 00:53
 					
-			  	if (brk_tasks_isheadless())
+			  	if (nxs_tasks_isheadless())
 					{
 						$result["console"][] = "storing value $value for $set_inputparameter_field";
 						//
-						brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
+						nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
 					}
 					else
 					{
@@ -176,7 +176,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 							$linenr = $nxs_gl_recipe_instruction_pointer["linenr"];
 							
 							$finished_instruction_pointer = "{$recipe_hash}_{$linenr}";
-							brk_tasks_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
+							nxs_task_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
 							
 							//
 							$currenturl = nxs_geturlcurrentpage();
@@ -213,7 +213,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 			  	$schema = $then_that_item["schema{$iterator_postfix}"];
 					if ($schema == "")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; schema not set";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; schema not set";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -229,9 +229,9 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						
 						if (nxs_stringcontains($ixplatform_filter, "{"))
 						{
-							if (brk_tasks_isheadless())
+							if (nxs_tasks_isheadless())
 							{
-								$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
+								$result["nackdetails"] = "nxs_task_instance_do_set_parameter; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
 								$result["result"] = "NACK";
 								return $result;
 							}
@@ -245,7 +245,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					}
 					else
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; ixplatform_filter not set";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; ixplatform_filter not set";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -256,7 +256,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					
 					if (substr_count($ixplatform_filter, "\"") > 2)
 					{
-						if (brk_tasks_isheadless())
+						if (nxs_tasks_isheadless())
 						{
 							$result["result"] = "NACK";
 					  	return $result;
@@ -272,7 +272,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					$field_to_pick = $then_that_item["field_to_pick{$iterator_postfix}"];
 					if ($field_to_pick == "")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; field_to_pick not set";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; field_to_pick not set";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -290,14 +290,14 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					if ($matchingmodeluri_count == 0)
 					{
 						$result["console"][] = "<span style='background-color: red; color: white;'>please upgrade the shortcode to function 'ixplatform' instead of 'ixplatform.row.fieldvalue'</span>";
-						$result["console"][] = "brk_tasks_instance_do_set_parameter; 0 rows returned, expected 1; set_inputparameter_field: $set_inputparameter_field";
+						$result["console"][] = "nxs_task_instance_do_set_parameter; 0 rows returned, expected 1; set_inputparameter_field: $set_inputparameter_field";
 				  	$result["result"] = "OK";
 				  	return $result;
 					}
 					else if ($matchingmodeluri_count > 1)
 					{
 						$result["console"][] = "<span style='background-color: red; color: white;'>please upgrade the shortcode to function 'ixplatform' instead of 'ixplatform.row.fieldvalue'</span>";
-						$result["console"][] = "brk_tasks_instance_do_set_parameter; {$matchingmodeluri_count} rows returned, expected 1";
+						$result["console"][] = "nxs_task_instance_do_set_parameter; {$matchingmodeluri_count} rows returned, expected 1";
 				  	$result["result"] = "OK";
 				  	return $result;
 					}
@@ -314,7 +314,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						
 						if (!isset($entry[$field_to_pick]))
 						{
-							$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; field_to_pick no property of matching entry of modeluri {$matchingmodeluri}? (did you misspell the column/property?) " . json_encode($entry);
+							$result["nackdetails"] = "nxs_task_instance_do_set_parameter; field_to_pick no property of matching entry of modeluri {$matchingmodeluri}? (did you misspell the column/property?) " . json_encode($entry);
 					  	$result["result"] = "NACK";
 					  	return $result;
 						}
@@ -336,10 +336,10 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						"function" => "staticvalue",
 						"value" => $value
 					);
-					$delegated_output = brk_tasks_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
+					$delegated_output = nxs_task_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
 					if ($delegated_output["result"] != "OK")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; error delegating";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; error delegating";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -355,7 +355,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 			  	$schema = $then_that_item["schema{$iterator_postfix}"];
 					if ($schema == "")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; schema not set";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; schema not set";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -368,9 +368,9 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						
 						if (nxs_stringcontains($ixplatform_filter, "{"))
 						{
-							if (brk_tasks_isheadless())
+							if (nxs_tasks_isheadless())
 							{
-								$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
+								$result["nackdetails"] = "nxs_task_instance_do_set_parameter; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
 								$result["result"] = "NACK";
 								return $result;
 							}
@@ -384,7 +384,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					}
 					else
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; ixplatform_filter not set";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; ixplatform_filter not set";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -394,7 +394,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					//error_log("ixplatformfilter: $ixplatform_filter");
 					if (substr_count($ixplatform_filter, "\"") > 2)
 					{
-						if (brk_tasks_isheadless())
+						if (nxs_tasks_isheadless())
 						{
 							$result["result"] = "NACK";
 					  	return $result;
@@ -427,7 +427,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						$not_found_behaviour = $then_that_item["not_found_behaviour{$iterator_postfix}"];
 						if ($not_found_behaviour == "")
 						{
-							$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; 0 rows returned, expected 1";
+							$result["nackdetails"] = "nxs_task_instance_do_set_parameter; 0 rows returned, expected 1";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -450,7 +450,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						$multi_found_behaviour = $then_that_item["multi_found_behaviour{$iterator_postfix}"];
 						if ($multi_found_behaviour == "")
 						{
-							$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; {$matchingmodeluri_count} rows returned, expected 1";
+							$result["nackdetails"] = "nxs_task_instance_do_set_parameter; {$matchingmodeluri_count} rows returned, expected 1";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -461,7 +461,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					  }
 					  else
 					  {
-					  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported multi_found_behaviour; $multi_found_behaviour";
+					  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported multi_found_behaviour; $multi_found_behaviour";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -478,15 +478,15 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 							$field_to_return = $then_that_item["field_to_return{$iterator_postfix}"];
 							if ($field_to_return == "")
 							{
-								if (brk_tasks_isheadless())
+								if (nxs_tasks_isheadless())
 								{
-									$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; field_to_return not set";
+									$result["nackdetails"] = "nxs_task_instance_do_set_parameter; field_to_return not set";
 							  	$result["result"] = "NACK";
 							  	return $result;
 							  }
 							  else
 							  {
-							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; brk_tasks_instance_do_set_parameter; field_to_return not set</span>";
+							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; nxs_task_instance_do_set_parameter; field_to_return not set</span>";
 									$result["result"] = "OK";
 							  	return $result;
 							  }
@@ -503,15 +503,15 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						
 							if (!isset($entry[$field_to_return]))
 							{
-								if (brk_tasks_isheadless())
+								if (nxs_tasks_isheadless())
 								{
-									$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)";
+									$result["nackdetails"] = "nxs_task_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)";
 							  	$result["result"] = "NACK";
 							  	return $result;
 							  }
 							  else
 							  {
-							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; brk_tasks_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)<br />Shortcode $q<br />Model uri: '$matchingmodeluri' returned: " . json_encode($entry) . "</span>";
+							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; nxs_task_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)<br />Shortcode $q<br />Model uri: '$matchingmodeluri' returned: " . json_encode($entry) . "</span>";
 									$result["result"] = "OK";
 							  	return $result;					  	
 							  }
@@ -527,7 +527,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					  }
 					  else
 					  {
-					  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported one_found_behaviour; $one_found_behaviour";
+					  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported one_found_behaviour; $one_found_behaviour";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -535,7 +535,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					else
 					{
 						// impossible to end up here
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; should not be possible to end up here";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; should not be possible to end up here";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -553,7 +553,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						  }
 						  else
 						  {
-						  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported empty_behaviour; $empty_behaviour (possible values; returnstatic:XYZ)";
+						  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported empty_behaviour; $empty_behaviour (possible values; returnstatic:XYZ)";
 						  	$result["result"] = "NACK";
 						  	return $result;
 						  }			  
@@ -577,10 +577,10 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						"function" => "staticvalue",
 						"value" => $value
 					);
-					$delegated_output = brk_tasks_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
+					$delegated_output = nxs_task_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
 					if ($delegated_output["result"] != "OK")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; error delegating";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; error delegating";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -660,7 +660,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 							),
 						);
 					}
-					$taskinstances_wrap = brk_tasks_searchtaskinstances($search_args);
+					$taskinstances_wrap = nxs_tasks_searchtaskinstances($search_args);
 					$taskinstances = $taskinstances_wrap["taskinstances"];
 					
 					
@@ -673,7 +673,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						}
 						else if ($not_found_behaviour == "")
 						{
-							$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; 0 rows returned, expected 1";
+							$result["nackdetails"] = "nxs_task_instance_do_set_parameter; 0 rows returned, expected 1";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -684,7 +684,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					  }
 					  else
 					  {
-					  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; 0 rows returned, unsupported not_found_behaviour; $not_found_behaviour";
+					  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; 0 rows returned, unsupported not_found_behaviour; $not_found_behaviour";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -698,7 +698,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						}
 						else if ($multi_found_behaviour == "")
 						{
-							$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; multiple rows returned, expected 1";
+							$result["nackdetails"] = "nxs_task_instance_do_set_parameter; multiple rows returned, expected 1";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -709,7 +709,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					  }
 					  else
 					  {
-					  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported multi_found_behaviour; $multi_found_behaviour";
+					  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported multi_found_behaviour; $multi_found_behaviour";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -726,15 +726,15 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 							$field_to_return = $then_that_item["field_to_return{$iterator_postfix}"];
 							if ($field_to_return == "")
 							{
-								if (brk_tasks_isheadless())
+								if (nxs_tasks_isheadless())
 								{
-									$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; field_to_return not set";
+									$result["nackdetails"] = "nxs_task_instance_do_set_parameter; field_to_return not set";
 							  	$result["result"] = "NACK";
 							  	return $result;
 							  }
 							  else
 							  {
-							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; brk_tasks_instance_do_set_parameter; field_to_return not set</span>";
+							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; nxs_task_instance_do_set_parameter; field_to_return not set</span>";
 									$result["result"] = "OK";
 							  	return $result;
 							  }
@@ -742,21 +742,21 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 							
 							$matchtaskid = $taskinstances[0]["taskid"];
 							$matchtaskinstanceid = $taskinstances[0]["taskinstanceid"];
-							$entry = brk_tasks_getinstanceinputparameters($matchtaskid, $matchtaskinstanceid);
+							$entry = nxs_task_getinstanceinputparameters($matchtaskid, $matchtaskinstanceid);
 							
 							//error_log("set_parameter; found; " . json_encode($entry));
 						
 							if (!isset($entry[$field_to_return]))
 							{
-								if (brk_tasks_isheadless())
+								if (nxs_tasks_isheadless())
 								{
-									$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; field_to_return no property of matching entry? (did you misspell the column/property?)";
+									$result["nackdetails"] = "nxs_task_instance_do_set_parameter; field_to_return no property of matching entry? (did you misspell the column/property?)";
 							  	$result["result"] = "NACK";
 							  	return $result;
 							  }
 							  else
 							  {
-							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; brk_tasks_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)<br />Shortcode $q<br />Model uri: '$matchingmodeluri' returned: " . json_encode($entry) . "</span>";
+							  	$result["console"][] = "<span style='background-color: red; color: white;'>NACK; nxs_task_instance_do_set_parameter; return field ('{$field_to_return}') no property of matching entry? (did you misspell the column/property?)<br />Shortcode $q<br />Model uri: '$matchingmodeluri' returned: " . json_encode($entry) . "</span>";
 									$result["result"] = "OK";
 							  	return $result;					  	
 							  }
@@ -772,7 +772,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					  }
 					  else
 					  {
-					  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported one_found_behaviour; $one_found_behaviour";
+					  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported one_found_behaviour; $one_found_behaviour";
 					  	$result["result"] = "NACK";
 					  	return $result;
 					  }
@@ -780,7 +780,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					else
 					{
 						// impossible to end up here
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; should not be possible to end up here";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; should not be possible to end up here";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -797,10 +797,10 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 						"function" => "staticvalue",
 						"value" => $value
 					);
-					$delegated_output = brk_tasks_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
+					$delegated_output = nxs_task_instance_do_set_parameter($delegated_then_that_item, $taskid, $taskinstanceid);
 					if ($delegated_output["result"] != "OK")
 					{
-						$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; error delegating";
+						$result["nackdetails"] = "nxs_task_instance_do_set_parameter; error delegating";
 				  	$result["result"] = "NACK";
 				  	return $result;
 					}
@@ -839,11 +839,11 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 					$value = do_shortcode($shortcode);
 					$existing_value = $inputparameters[$set_inputparameter_field];
 					
-			  	if (brk_tasks_isheadless())
+			  	if (nxs_tasks_isheadless())
 					{
 						$result["console"][] = "storing value $value for $set_inputparameter_field";
 						//
-						brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
+						nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
 					}
 					else
 					{
@@ -919,7 +919,7 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 			  */
 			  else
 			  {
-			  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unsupported function; $function";
+			  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unsupported function; $function";
 			  	$result["result"] = "NACK";
 			  	return $result;
 			  }
@@ -933,21 +933,21 @@ function brk_tasks_instance_do_set_bulk_parameters($then_that_item, $taskid, $ta
 		  $multiparameterindex++;
 		  if ($multiparameterindex > 1024)
 		  {
-		  	$result["nackdetails"] = "brk_tasks_instance_do_set_parameter; unexpected $multiparameterindex (endless loop?)";
+		  	$result["nackdetails"] = "nxs_task_instance_do_set_parameter; unexpected $multiparameterindex (endless loop?)";
 		  	$result["result"] = "NACK";
 		  	return $result;
 		  }
 		}
 		
 		// now that the iteration finished, output to screen (if not headless)
-		if (!brk_tasks_isheadless())
+		if (!nxs_tasks_isheadless())
 		{
 			global $nxs_gl_recipe_instruction_pointer;
 			$recipe_hash = $nxs_gl_recipe_instruction_pointer["recipe_hash"];
 			$linenr = $nxs_gl_recipe_instruction_pointer["linenr"];
 			
 			$finished_instruction_pointer = "{$recipe_hash}_{$linenr}";
-			brk_tasks_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
+			nxs_task_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
 			
 			//
 			$currenturl = nxs_geturlcurrentpage();

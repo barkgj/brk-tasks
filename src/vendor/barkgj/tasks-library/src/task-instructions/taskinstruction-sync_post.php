@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_encodespecialchars($input)
+function nxs_task_instance_encodespecialchars($input)
 {
 	$value = $input;
 	
@@ -19,7 +19,7 @@ function brk_tasks_instance_encodespecialchars($input)
 	return $value;
 }
 
-function brk_tasks_instance_decodespecialchars($input)
+function nxs_task_instance_decodespecialchars($input)
 {
 	$value = $input;
 	
@@ -37,12 +37,12 @@ function brk_tasks_instance_decodespecialchars($input)
 	return $value;
 }
 
-function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_sync_post($then_that_item, $taskid, $taskinstanceid)
 {
 	//$result["console"][] = "SYNC_POST";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
-	$inputparameters = brk_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
+	$inputparameters = nxs_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
 	
 	// then_that_item keyvalues are stronger than inputparameters
 	$args = wp_parse_args($then_that_item, $inputparameters);
@@ -116,7 +116,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	$encoded_args = array();
 	foreach ($args as $k => $v)
 	{
-		$encoded_args[$k] = brk_tasks_instance_encodespecialchars($v);
+		$encoded_args[$k] = nxs_task_instance_encodespecialchars($v);
 		
 	}
 	
@@ -130,7 +130,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 		// second time
 		$escape_field_val = nxs_filter_translatesingle($escape_field_val, "{{", "}}", $encoded_args);
 		// encode weird chars (') into long form (__single quote__)
-		// $escape_field_val = brk_tasks_instance_encodespecialchars($escape_field_val);
+		// $escape_field_val = nxs_task_instance_encodespecialchars($escape_field_val);
 		
 		// put it back
 		$args[$escape_field] = $escape_field_val;
@@ -140,7 +140,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	if (true)
 	{
 		$encoded_post_meta_json = $args["post_meta_json"];	// can /will/ contain __nxs:doublequote__
-		$post_meta_json = brk_tasks_instance_decodespecialchars($encoded_post_meta_json);
+		$post_meta_json = nxs_task_instance_decodespecialchars($encoded_post_meta_json);
 		
 		//echo "step1:" . $post_meta_json . "<br />";
 		
@@ -154,7 +154,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 		
 		//echo "step2:" . $improved_post_meta_json . "<br />";
 		
-		$improved_post_meta_json = brk_tasks_instance_encodespecialchars($improved_post_meta_json);
+		$improved_post_meta_json = nxs_task_instance_encodespecialchars($improved_post_meta_json);
 		
 		//echo "step3:" . $improved_post_meta_json . "<br />";
 		//die();
@@ -164,7 +164,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	
 	foreach ($args as $k => $v)
 	{
-		$args[$k] = brk_tasks_instance_encodespecialchars($v);
+		$args[$k] = nxs_task_instance_encodespecialchars($v);
 		$args[$k] = str_replace("\n", "__nxs:newline__", $args[$k]);
 		$args[$k] = str_replace("\r", "__nxs:carriagereturn__", $args[$k]);
 	}
@@ -227,7 +227,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	
 	if ($postargs == false)
 	{
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$result["console"][] = "postargs is false (incorrect json?) unable to proceed";
 			$result["console"][] = "json: $post_args_jsonstring";
@@ -246,7 +246,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	
 	if ($postargs == null)
 	{
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$result["console"][] = "postargs is null (incorrect json?) unable to proceed";
 			$result["result"] = "NACK";
@@ -283,7 +283,7 @@ function brk_tasks_instance_do_sync_post($then_that_item, $taskid, $taskinstance
 	}
 	*/
 	
-	if (brk_tasks_isheadless())
+	if (nxs_tasks_isheadless())
 	{
 		// automated
 		// post the form

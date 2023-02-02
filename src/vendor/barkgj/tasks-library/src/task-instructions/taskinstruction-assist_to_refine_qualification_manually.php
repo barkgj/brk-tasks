@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_assist_to_refine_qualification_manually($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_to_refine_qualification_manually($then_that_item, $taskid, $taskinstanceid)
 {
 	$result = array();
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$refined_to_taskid = $inputparameters["refined_to_taskid"];
@@ -22,11 +22,11 @@ function brk_tasks_instance_do_assist_to_refine_qualification_manually($then_tha
 		
 		// extend the possibilities using the taskids as declared in the .workflows.json file
 		// (if task is automated)
-		$processingtype = brk_tasks_getprocessingtype($taskid);
+		$processingtype = nxs_tasks_getprocessingtype($taskid);
 		if ($processingtype == "automated")
 		{
 			require_once("/srv/generic/libraries-available/nxs-workflows/nxs-workflows.php");
-			$workflows = brk_tasks_get_workflows($taskid);
+			$workflows = nxs_task_get_workflows($taskid);
 			foreach ($workflows as $workflow)
 			{
 				$then_that_items = $workflow["then_that_items"];
@@ -54,7 +54,7 @@ function brk_tasks_instance_do_assist_to_refine_qualification_manually($then_tha
 			$refineurl = "";
 			$currenturl = nxs_geturlcurrentpage();
 			$returnurl = $currenturl;
-			$title = brk_tasks_gettaskstitle($possible_taskid);
+			$title = nxs_tasks_gettaskstitle($possible_taskid);
 			$from_where = "";
 			if ($automatedworkpossibilities[$possible_taskid] == true)
 			{
@@ -82,7 +82,7 @@ EOD;
 	}
 	else
 	{
-		$title = brk_tasks_gettaskstitle($refined_to_taskid);
+		$title = nxs_tasks_gettaskstitle($refined_to_taskid);
 		$result["console"][] = "You picked $title ($refined_to_taskid)";
 		$result["console"][] = "Refine the qualification of this instance by creating a new instance of the refined qualification and by ending this instance";
 		

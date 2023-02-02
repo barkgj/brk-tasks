@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_mail_template_to_email_address($then_that_item, $taskid, $taskinstanceid)
 {
 	// $marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	// runtime parameters
 	$inputparameters["taskid"] = $taskid;
@@ -34,7 +34,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
 			if (nxs_stringcontains($val, "{{") || nxs_stringcontains($val, "}}"))
 			{
 				$msg = "unable to send send-mail-template-to-email-address; parameter {$key} contains an unreplaced place holder (contains {{ or }})";
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					error_log($msg);
 					$result["nackdetails"] = $msg;
@@ -56,7 +56,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
   	if ($mailtemplate == "")
   	{
   		$msg = "unable to send send-mail-template-to-email-address (mailtemplate {$mailtemplate}; mailtemplate not specified";
-			if (brk_tasks_isheadless())
+			if (nxs_tasks_isheadless())
 			{
 				error_log($msg);
 				$result["nackdetails"] = $msg;
@@ -85,7 +85,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
 			if (!isset($atts[$requiredplaceholder]))
 			{
 				$msg = "unable to send send-mail-template-to-email-address (mailtemplate {$mailtemplate}; required field $requiredplaceholder in the mailtemplate is not set";
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					error_log($msg);
 					$result["nackdetails"] = $msg;
@@ -109,7 +109,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
 					if (nxs_stringcontains($val, $notallowed))
 					{
 						$msg = "err... required field $requiredplaceholder in the mailtemplate contains invalid char; (( $notallowed )) (( $val ))";
-						if (brk_tasks_isheadless())
+						if (nxs_tasks_isheadless())
 						{
 							error_log($msg);
 							$result["nackdetails"] = $msg;
@@ -140,7 +140,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
 		$enabler = md5($whatmakesthisunique);
 
 		$doit = false;
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$doit = true;
 			
@@ -157,11 +157,11 @@ function brk_tasks_instance_do_send_mail_template_to_email_address($then_that_it
 		if ($doit)
 		{
 			$result["console"][] = "creating task 33 to send mail (headless)";
-			$create_result = brk_tasks_createtaskinstance($taskid_to_create, $assigned_to, $createdby_taskid, $createdby_taskinstanceid, $mail_assignee, $atts);
+			$create_result = nxs_tasks_createtaskinstance($taskid_to_create, $assigned_to, $createdby_taskid, $createdby_taskinstanceid, $mail_assignee, $atts);
 			if ($create_result["result"] != "OK")
 			{
 				$msg = "unable to send send-mail-template-to-email-address (mailtemplate {$mailtemplate}; task creation 33 failed";
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					error_log($msg);
 					$result["nackdetails"] = $msg;

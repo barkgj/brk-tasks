@@ -1,11 +1,11 @@
 <?php
 
-function brk_tasks_instance_do_pick_license($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_pick_license($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "PICK LICENSE";
 	$result["console"][] = "-----------";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$licenseid = $inputparameters["licenseid"];

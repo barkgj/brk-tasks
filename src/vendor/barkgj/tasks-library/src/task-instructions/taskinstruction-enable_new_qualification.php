@@ -1,11 +1,11 @@
 <?php
 
-function brk_tasks_instance_do_enable_new_qualification($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_enable_new_qualification($then_that_item, $taskid, $taskinstanceid)
 {
-	$stickyparameters = brk_tasks_getstickyparameters();
+	$stickyparameters = nxs_task_getstickyparameters();
 	$stickyparameters_html = implode(", ", $stickyparameters);
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 
 	$qualification = $inputparameters["qualification"];
@@ -18,7 +18,7 @@ function brk_tasks_instance_do_enable_new_qualification($then_that_item, $taskid
 	
 	if ($task_title_template == "")
 	{
-		$msg = "brk_tasks_instance_do_enable_new_qualification; task_title_template not set";
+		$msg = "nxs_task_instance_do_enable_new_qualification; task_title_template not set";
 		$result["console"][] = $msg;
   	$result["result"] = "OK";
   	return $result;
@@ -212,7 +212,7 @@ EOD;
 		$result["console"][] = do_shortcode($line);
 	}
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$result["console"][] = "</div>";

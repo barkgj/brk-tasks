@@ -1,13 +1,13 @@
 <?php
 
-function brk_tasks_instance_do_assist_to_reset_roles_and_capabilities_of_each_site($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_to_reset_roles_and_capabilities_of_each_site($then_that_item, $taskid, $taskinstanceid)
 {
 	// only do this if the task is started
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	if ($state != "STARTED")
 	{
-		$result["console"][] = "IGNORING TASK INSTRUCTION brk_tasks_instance_do_assist_to_reset_roles_and_capabilities_of_each_site BECAUSE OF STATE; $state";
+		$result["console"][] = "IGNORING TASK INSTRUCTION nxs_task_instance_do_assist_to_reset_roles_and_capabilities_of_each_site BECAUSE OF STATE; $state";
 		$result["result"] = "OK";
 		return $result;
 	}

@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_invoke_api($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_invoke_api($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	$runtimeinputparameters = $inputparameters;
 	$runtimeinputparameters["taskid"] = $taskid;
@@ -146,7 +146,7 @@ function brk_tasks_instance_do_invoke_api($then_that_item, $taskid, $taskinstanc
 	  }
 	  
 	  $enabler = md5($invoke_api_url);
-	  if (brk_tasks_isheadless())
+	  if (nxs_tasks_isheadless())
 	  {
 	  	$doit = true;
 	  }
@@ -259,7 +259,7 @@ function brk_tasks_instance_do_invoke_api($then_that_item, $taskid, $taskinstanc
 						}
 					}
 					
-					brk_tasks_updateinstance($taskid, $taskinstanceid, $instancemeta);
+					nxs_tasks_updateinstance($taskid, $taskinstanceid, $instancemeta);
 				}
 				else
 				{
@@ -269,7 +269,7 @@ function brk_tasks_instance_do_invoke_api($then_that_item, $taskid, $taskinstanc
 		  	$result["invoke_api_result"] = $invoke_api_result;
 		  	
 		  	//
-				if (!brk_tasks_isheadless())
+				if (!nxs_tasks_isheadless())
 				{
 					if ($invoke_api_result["result"] == "OK")
 					{
@@ -291,7 +291,7 @@ function brk_tasks_instance_do_invoke_api($then_that_item, $taskid, $taskinstanc
 						$returnurl = "{$returnurl}#{$marker}";
 					  $result["console"][] = "<script>window.location.href = '{$returnurl}';</script>";
 					  
-					  brk_tasks_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
+					  nxs_task_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
 					}
 				}
 		  }

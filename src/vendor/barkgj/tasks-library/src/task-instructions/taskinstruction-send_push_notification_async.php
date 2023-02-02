@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_do_send_push_notification_async($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_push_notification_async($then_that_item, $taskid, $taskinstanceid)
 {
 	if ($taskid == 542)
 	{
@@ -14,7 +14,7 @@ function brk_tasks_instance_do_send_push_notification_async($then_that_item, $ta
 	
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	// replace placeholders in values of atts
@@ -52,7 +52,7 @@ function brk_tasks_instance_do_send_push_notification_async($then_that_item, $ta
 		$enabler = md5($title . "-" . $message);
 		
 		$should_execute = false;
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$should_execute = true;
 		}
@@ -73,11 +73,11 @@ function brk_tasks_instance_do_send_push_notification_async($then_that_item, $ta
 			$mail_assignee = false;
 		
 			$result["console"][] = "creating task {$taskid_to_create} to send push notification (headless)";
-			$create_result = brk_tasks_createtaskinstance($taskid_to_create, $assigned_to, $createdby_taskid, $createdby_taskinstanceid, $mail_assignee, $atts);
+			$create_result = nxs_tasks_createtaskinstance($taskid_to_create, $assigned_to, $createdby_taskid, $createdby_taskinstanceid, $mail_assignee, $atts);
 			if ($create_result["result"] != "OK")
 			{
 				$msg = "unable to send push notification (headless); task creation failed";
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					error_log($msg);
 					$result["nackdetails"] = $msg;

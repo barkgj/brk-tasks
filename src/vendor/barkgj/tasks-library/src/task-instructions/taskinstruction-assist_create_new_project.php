@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_do_assist_create_new_project($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_create_new_project($then_that_item, $taskid, $taskinstanceid)
 {
 	$block = <<<EOD
 Sometimes a message arrives which requires action on our side in the form of a project.
@@ -56,7 +56,7 @@ EOD;
 		$result["console"][] = do_shortcode($line);
 	}
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$result["console"][] = "</div>";

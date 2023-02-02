@@ -318,12 +318,6 @@ final class functions
 		return (substr($haystack, 0, $length) === $needle);
 	}
 
-	public static function stringendswith($haystack, $needle)
-	{
-		$result = str_ends_with($haystack, $needle);
-		return $result;
-	}
-
 	public static function isutf8($string) 
 	{
 		if (function_exists("mb_check_encoding")) 

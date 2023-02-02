@@ -2,7 +2,7 @@
 
 require_once("/srv/generic/libraries-available/nxs-mail/nxs_mail_logic.php");
 
-function brk_tasks_instance_do_send_mail_template_to_email_address_actual_implementation($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_mail_template_to_email_address_actual_implementation($then_that_item, $taskid, $taskinstanceid)
 {
 	if ($taskid != 33)
 	{
@@ -13,7 +13,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address_actual_implem
 	
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	$event_Records_0_ses_mail_commonHeaders_messageId = $inputparameters["event_Records_0_ses_mail_commonHeaders_messageId"];
 	$state = $instancemeta["state"];
@@ -46,7 +46,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address_actual_implem
 		{
 			if (!isset($inputparameters[$key]))
 			{
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					$result["nackdetails"] = "ERR; unable to proceed; mailtemplate {$mailtemplate} uses parameter $key which is not specified?";
 					$result["result"] = "NACK";
@@ -82,7 +82,7 @@ function brk_tasks_instance_do_send_mail_template_to_email_address_actual_implem
 		$enabler = md5($action_url);
 		
 		$should_execute = false;
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$should_execute = true;
 		}
@@ -100,9 +100,9 @@ function brk_tasks_instance_do_send_mail_template_to_email_address_actual_implem
 			
 			$action_string = file_get_contents($action_url);
 			
-			$key = brk_tasks_getunallocatedinputparameter("send_mail_template_result_json_{$mailtemplate}", $inputparameters);
+			$key = nxs_tasks_getunallocatedinputparameter("send_mail_template_result_json_{$mailtemplate}", $inputparameters);
 			$result["console"][] = "storing api result in $key";
-			brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $action_string);
+			nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $action_string);
 			
 			$action_result = json_decode($action_string, true);
 			

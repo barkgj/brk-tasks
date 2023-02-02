@@ -1,17 +1,17 @@
 <?php
 
-function brk_tasks_instance_do_echo($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_echo($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];
 
   $result = array();
   
-	if (!brk_tasks_isheadless())
+	if (!nxs_tasks_isheadless())
 	{
 		global $nxs_gl_recipe_instruction_pointer;
 		
@@ -56,11 +56,11 @@ function brk_tasks_instance_do_echo($then_that_item, $taskid, $taskinstanceid)
 			$value = do_shortcode($shortcode);
 			$existing_value = $inputparameters[$set_inputparameter_field];
 			
-	  	if (brk_tasks_isheadless())
+	  	if (nxs_tasks_isheadless())
 			{
 				$result["console"][] = "echoing value $value for $set_inputparameter_field";
 				//
-				// brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
+				// nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $set_inputparameter_field, $value);
 			}
 			else
 			{
@@ -93,7 +93,7 @@ function brk_tasks_instance_do_echo($then_that_item, $taskid, $taskinstanceid)
 	  }
 	  else
 	  {
-	  	$result["nackdetails"] = "brk_tasks_instance_do_echo; unsupported function; $function";
+	  	$result["nackdetails"] = "nxs_task_instance_do_echo; unsupported function; $function";
 	  	$result["result"] = "NACK";
 	  	return $result;
 	  }

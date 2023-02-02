@@ -2,14 +2,14 @@
 
 require_once("/srv/generic/libraries-available/nxs-tasks/nxs-tasks.php");
 
-function brk_tasks_instance_do_pick_task($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_pick_task($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
 	$field = $then_that_item["field"];
 	if ($field == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_pick_task; err; field attribute not set";
+		$result["console"][] = "nxs_task_instance_do_pick_task; err; field attribute not set";
 		$result["result"] = "OK";
 		return $result;
 	}
@@ -17,7 +17,7 @@ function brk_tasks_instance_do_pick_task($then_that_item, $taskid, $taskinstance
 	$result["console"][] = "TASK PICKER ({$field})";
 	$result["console"][] = "-----------";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$value = $inputparameters[$field];
@@ -69,7 +69,7 @@ EOD;
 	}
 	else
 	{
-		$title = brk_tasks_gettaskstitle($value);
+		$title = nxs_tasks_gettaskstitle($value);
 		$result["console"][] = "TASK PICKED: $value ($title)";
 		// allow user to pick a different one
 		$result["console"][] = "";	// this is an empty line

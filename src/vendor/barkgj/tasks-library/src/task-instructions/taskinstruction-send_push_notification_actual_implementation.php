@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_do_send_push_notification_actual_implementation($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_push_notification_actual_implementation($then_that_item, $taskid, $taskinstanceid)
 {
 	if ($taskid != 542)
 	{
@@ -11,7 +11,7 @@ function brk_tasks_instance_do_send_push_notification_actual_implementation($the
 	
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	$state = $instancemeta["state"];
 	
@@ -48,7 +48,7 @@ function brk_tasks_instance_do_send_push_notification_actual_implementation($the
 		$enabler = md5($action_url);
 		
 		$should_execute = false;
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$should_execute = true;
 		}
@@ -65,9 +65,9 @@ function brk_tasks_instance_do_send_push_notification_actual_implementation($the
 			// here we actually send the message
 			
 			$action_string = file_get_contents($action_url);
-			$key = brk_tasks_getunallocatedinputparameter("send_push_notification_result_json", $inputparameters);
+			$key = nxs_tasks_getunallocatedinputparameter("send_push_notification_result_json", $inputparameters);
 			$result["console"][] = "storing api result in $key";
-			brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $action_string);
+			nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $action_string);
 			$action_result = json_decode($action_string, true);
 		}
 		else

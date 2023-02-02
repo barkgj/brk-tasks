@@ -1,17 +1,17 @@
 <?php
 
-function brk_tasks_instance_do_update_parameter($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_update_parameter($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];
 
   $result = array();
   
-	if (!brk_tasks_isheadless())
+	if (!nxs_tasks_isheadless())
 	{
 		global $nxs_gl_recipe_instruction_pointer;
 		
@@ -71,11 +71,11 @@ function brk_tasks_instance_do_update_parameter($then_that_item, $taskid, $taski
 				$value_json = nxs_filter_translatesingle($value_json, "{{", "}}", $inputparameters);
 				
 				
-		  	if (brk_tasks_isheadless())
+		  	if (nxs_tasks_isheadless())
 				{
 					$result["console"][] = "storing value $value for $set_inputparameter_field";
 					//
-					brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $parameter, $value_json);
+					nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $parameter, $value_json);
 				}
 				else
 				{
@@ -94,7 +94,7 @@ function brk_tasks_instance_do_update_parameter($then_that_item, $taskid, $taski
 						$linenr = $nxs_gl_recipe_instruction_pointer["linenr"];
 						
 						$finished_instruction_pointer = "{$recipe_hash}_{$linenr}";
-						brk_tasks_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
+						nxs_task_setfinishedinstructionpointer($taskid, $taskinstanceid, $finished_instruction_pointer);
 						
 						//
 						$currenturl = nxs_geturlcurrentpage();

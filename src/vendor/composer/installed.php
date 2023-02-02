@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'barkgj/wp-tasks',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '3ec970c333c777ef2c4bae274c0db41d6463f43d',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'barkgj/datasink-library' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '95316102107a6ac335d0e3b9051d28cd9265bf44',
+            'reference' => 'b177d7dd0501709bcef4fa3a11b931bedcb330f2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../barkgj/datasink-library',
             'aliases' => array(
@@ -44,9 +44,9 @@
             'dev_requirement' => false,
         ),
         'barkgj/wp-tasks' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '3ec970c333c777ef2c4bae274c0db41d6463f43d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../../',
             'aliases' => array(),

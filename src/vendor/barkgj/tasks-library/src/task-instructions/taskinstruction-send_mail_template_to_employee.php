@@ -2,11 +2,11 @@
 
 require_once("/srv/generic/libraries-available/nxs-tasks/task-instructions/taskinstruction-send_mail_template_to_email_address.php");
 
-function brk_tasks_instance_do_send_mail_template_to_employee($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_mail_template_to_employee($then_that_item, $taskid, $taskinstanceid)
 {
 	// $marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	//
@@ -31,7 +31,7 @@ function brk_tasks_instance_do_send_mail_template_to_employee($then_that_item, $
   	if ($employee_id == "")
   	{
   		$msg = "employee_id not set";
-	    if (brk_tasks_isheadless())
+	    if (nxs_tasks_isheadless())
 	    {
 	    	$result["result"] = "NACK";
   			$result["nack_details"] = $msg;
@@ -64,12 +64,12 @@ function brk_tasks_instance_do_send_mail_template_to_employee($then_that_item, $
 			}
 			*/
 			
-			$delegated_result = brk_tasks_instance_do_send_mail_template_to_email_address($delegated_then_that_item, $taskid, $taskinstanceid);
+			$delegated_result = nxs_task_instance_do_send_mail_template_to_email_address($delegated_then_that_item, $taskid, $taskinstanceid);
 			
 			if ($delegated_result["result"] == "NACK")
 			{
 				$msg = "error sending mail";
-		    if (brk_tasks_isheadless())
+		    if (nxs_tasks_isheadless())
 		    {
 		    	$result["result"] = "NACK";
 	  			$result["nack_details"] = $msg;

@@ -44,9 +44,9 @@ function nxs_get_remindergroups_for_endclientslive()
 	return $remindergroups;
 }
 
-function brk_tasks_instance_do_notify_clients_for_endclientlive_renewals($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_notify_clients_for_endclientlive_renewals($then_that_item, $taskid, $taskinstanceid)
 {
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	
 	$inputparameters = $instancemeta["inputparameters"];
@@ -105,7 +105,7 @@ function brk_tasks_instance_do_notify_clients_for_endclientlive_renewals($then_t
 				}
 				
 				$should_do_it = false;
-				if (brk_tasks_isheadless())
+				if (nxs_tasks_isheadless())
 				{
 					$should_do_it = true;
 				}

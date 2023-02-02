@@ -1,8 +1,8 @@
 <?php
 
-function brk_tasks_instance_do_archive_taskinstances_for_each_task($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_archive_taskinstances_for_each_task($then_that_item, $taskid, $taskinstanceid)
 {
-	if (!brk_tasks_isheadless())
+	if (!nxs_tasks_isheadless())
 	{
 		$result["console"][] = "Sorry, only implemented for headless environment";
 	}
@@ -10,7 +10,7 @@ function brk_tasks_instance_do_archive_taskinstances_for_each_task($then_that_it
 	{
 		// $marker = $then_that_item["marker"];
 		
-		$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+		$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 		// $inputparameters = $instancemeta["inputparameters"];
 		
 		$state = $instancemeta["state"];

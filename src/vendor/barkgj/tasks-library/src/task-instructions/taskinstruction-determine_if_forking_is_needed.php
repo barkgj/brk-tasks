@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_determine_if_forking_is_needed($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_determine_if_forking_is_needed($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "DETERMINE IF WORKING IS NEEDED";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$field = "fork_required_conclusion";
@@ -17,7 +17,7 @@ function brk_tasks_instance_do_determine_if_forking_is_needed($then_that_item, $
 	// identified while handling 131 (131 - Qualify message from customer/prospect)
 	
 	$value = "NOT_REQUIRED";
-	brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $field, $value);
+	nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $field, $value);
 
 	$result["console"][] = "STORED VALUE $value as input parameter $field";
 	$result["result"] = "OK";

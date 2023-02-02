@@ -1,15 +1,15 @@
 <?php
 
-function brk_tasks_instance_do_ensure_no_matching_taskinstances($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_ensure_no_matching_taskinstances($then_that_item, $taskid, $taskinstanceid)
 {
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	
 	$result = array();
 	
 	if ($state == "STARTED")
 	{
-		$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+		$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 		$inputparameters = $instancemeta["inputparameters"];
 	
 	  // construct the search arguments
@@ -104,12 +104,12 @@ function brk_tasks_instance_do_ensure_no_matching_taskinstances($then_that_item,
 				),
 			);
 		}
-		$taskinstances_wrap = brk_tasks_searchtaskinstances($search_args);
+		$taskinstances_wrap = nxs_tasks_searchtaskinstances($search_args);
 		$taskinstances = $taskinstances_wrap["taskinstances"];
 		
 		if (count($taskinstances) > 0)
 		{
-			if (brk_tasks_isheadless())
+			if (nxs_tasks_isheadless())
 			{
 				$msg = "unable to proceed; found 1 or more task instances for " . json_encode($search_args);
 				$result["console"][] = $msg;

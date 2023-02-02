@@ -1,11 +1,11 @@
 <?php
 
-function brk_tasks_instance_do_interpret($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_interpret($then_that_item, $taskid, $taskinstanceid)
 {
 	//$result["console"][] = "INTERPRET";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
-	$inputparameters = brk_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
+	$inputparameters = nxs_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
 	
 	// then_that_item keyvalues are stronger than inputparameters
 	$args = wp_parse_args($then_that_item, $inputparameters);
@@ -44,10 +44,10 @@ function brk_tasks_instance_do_interpret($then_that_item, $taskid, $taskinstance
 		}
 	}
 	
-	if (brk_tasks_isheadless())
+	if (nxs_tasks_isheadless())
 	{
 		$interpretation_attachmentid = $args["interpretation_attachmentid"];
-		$interpretation_string = brk_tasks_gettaskrecipe_attachment($taskid, $taskinstanceid, $interpretation_attachmentid);
+		$interpretation_string = nxs_tasks_gettaskrecipe_attachment($taskid, $taskinstanceid, $interpretation_attachmentid);
 		$interpretation = json_decode($interpretation_string, true);
 		//var_dump($interpretation);
 		//die();

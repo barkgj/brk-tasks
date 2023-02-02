@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_do_assist_in_ensuring_all_plugins_proper_state_on_all_websites($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_in_ensuring_all_plugins_proper_state_on_all_websites($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "QUERYING ALL SITES IN OUR INFRA";
 	

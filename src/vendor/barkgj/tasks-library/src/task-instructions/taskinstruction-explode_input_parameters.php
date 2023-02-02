@@ -1,8 +1,8 @@
 <?php
 
-function brk_tasks_instance_do_explode_input_parameters($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_explode_input_parameters($then_that_item, $taskid, $taskinstanceid)
 {
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$result = array();
@@ -33,14 +33,14 @@ function brk_tasks_instance_do_explode_input_parameters($then_that_item, $taskid
 	  	//$result["console"][] = json_encode($atts);
 	  	foreach ($atts as $key => $val)
 	  	{
-		  	if (!brk_tasks_isheadless())
+		  	if (!nxs_tasks_isheadless())
 	  		{		
 		  		$result["console"][] = do_shortcode("[nxs_p001_task_instruction type='set_parameter' set_inputparameter_field='{$key}' function='staticvalue' value='{$val}']");
 		  	}
 		  	else
 		  	{
 		  		$result["console"][] = "Storing $key $val";
-		  		brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
+		  		nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
 		  	}
 		  }
 		}
@@ -78,20 +78,20 @@ function brk_tasks_instance_do_explode_input_parameters($then_that_item, $taskid
 				$val = $humanid;
 				
 				//
-				if (!brk_tasks_isheadless())
+				if (!nxs_tasks_isheadless())
 	  		{		
 		  		$keyvalues[$key] = $val;
 		  	}
 		  	else
 		  	{
 		  		$result["console"][] = "Storing $key $val";
-		  		brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
+		  		nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
 		  	}
 				
 				$index++;
 			}
 			
-			if (!brk_tasks_isheadless())
+			if (!nxs_tasks_isheadless())
 	  	{
 	  		$index = 0;
 	  		
@@ -156,7 +156,7 @@ function brk_tasks_instance_do_explode_input_parameters($then_that_item, $taskid
 				{
 					$result["console"][] = "storing output $key (value: $val)";
 					// $instancemeta["inputparameters"][$key] = $val;
-					brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
+					nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $key, $val);
 				}
 				else
 				{
@@ -164,8 +164,8 @@ function brk_tasks_instance_do_explode_input_parameters($then_that_item, $taskid
 				}
 			}
 			
-			//brk_tasks_updateinstance($taskid, $taskinstanceid, $instancemeta);
-			//brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "test", "123456");
+			//nxs_tasks_updateinstance($taskid, $taskinstanceid, $instancemeta);
+			//nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "test", "123456");
 		}
   }
   else

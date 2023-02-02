@@ -1,11 +1,11 @@
 <?php
 
-function brk_tasks_instance_do_input_parameter($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_input_parameter($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	$inputtype = $then_that_item["inputtype"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	 
 	$name = $then_that_item["name"];

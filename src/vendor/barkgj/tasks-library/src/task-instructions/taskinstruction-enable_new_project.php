@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_enable_new_project($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_enable_new_project($then_that_item, $taskid, $taskinstanceid)
 {
 	$result = array();
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 
 	$result["console"][] = "<div style='background-color: #eee; border-color: #777; border-width: 3px; border-style: solid; padding: 5px;'>";
@@ -49,7 +49,7 @@ function brk_tasks_instance_do_enable_new_project($then_that_item, $taskid, $tas
 			),
 		);
 		
-		$taskinstances_wrap = brk_tasks_searchtaskinstances($search_args);
+		$taskinstances_wrap = nxs_tasks_searchtaskinstances($search_args);
 		$taskinstances = $taskinstances_wrap["taskinstances"];
 		
 		if (count($taskinstances) == 0)

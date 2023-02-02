@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
 {
 	// $marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];
@@ -12,11 +12,11 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
   $result = array();
   
   $should_do_it = true;
-  $isheadless = brk_tasks_isheadless();
+  $isheadless = nxs_tasks_isheadless();
   
   if (!in_array($state, array("CREATED", "STARTED", "ENDED", "ABORTED")))
   {
-  	nxs_webmethod_return_nack("brk_tasks_instance_do_ensure; unsupported state; $state; not sure what to do?");
+  	nxs_webmethod_return_nack("nxs_task_instance_do_ensure; unsupported state; $state; not sure what to do?");
   }
   
   if ($should_do_it && in_array($state, array("CREATED", "ENDED", "ABORTED")))
@@ -44,7 +44,7 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
   {
 	  if (nxs_stringcontains($ensure_no_curly_brackets, "{") || nxs_stringcontains($ensure_no_curly_brackets, "}"))
 	  {
-	  	$issues[]= "brk_tasks_instance_do_ensure; violation; still contains a curly bracket";
+	  	$issues[]= "nxs_task_instance_do_ensure; violation; still contains a curly bracket";
 	  }
 	}
 	
@@ -58,7 +58,7 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
   
 	  if (!nxs_stringcontains($ensure_curly_brackets, "{") || !nxs_stringcontains($ensure_curly_brackets, "}"))
 	  {
-	  	$issues[]= "brk_tasks_instance_do_ensure; violation; should contain a opened and closed curly bracket";
+	  	$issues[]= "nxs_task_instance_do_ensure; violation; should contain a opened and closed curly bracket";
 	  }
 	}
 	
@@ -71,7 +71,7 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
 	{
 		if ($ensure_true != "true")
 	  {
-	  	$issues[]= "brk_tasks_instance_do_ensure; violation; is false";
+	  	$issues[]= "nxs_task_instance_do_ensure; violation; is false";
 	  }
 	}
 	
@@ -82,7 +82,7 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
   {
 	  if ($ensure_not_empty == "")
 	  {
-	  	$issues[]= "brk_tasks_instance_do_ensure; violation; ensure_not_empty is empty";
+	  	$issues[]= "nxs_task_instance_do_ensure; violation; ensure_not_empty is empty";
 	  }
 	}
 	
@@ -93,7 +93,7 @@ function brk_tasks_instance_do_ensure($then_that_item, $taskid, $taskinstanceid)
 		if ($should_do_it)
 		{
 			// at least one issue
-			$result["nackdetails"] = "brk_tasks_instance_do_ensure; at least one violation";
+			$result["nackdetails"] = "nxs_task_instance_do_ensure; at least one violation";
 			$result["issues"] = $issues;
 			
 			if (isset($alt_text))

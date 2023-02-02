@@ -2,7 +2,7 @@
 
 require_once("/srv/generic/libraries-available/nxs-mail/nxs_mail_logic.php");
 
-function brk_tasks_instance_do_render_input_fields_for_mailtemplate($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_render_input_fields_for_mailtemplate($then_that_item, $taskid, $taskinstanceid)
 {
 	if ($taskid != 33)
 	{
@@ -11,13 +11,13 @@ function brk_tasks_instance_do_render_input_fields_for_mailtemplate($then_that_i
 		return $result;
 	}
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	$state = $instancemeta["state"];
 	
 	if ($state == "STARTED")
 	{
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$result["console"][] = "nothing to do for headless user";
 		}

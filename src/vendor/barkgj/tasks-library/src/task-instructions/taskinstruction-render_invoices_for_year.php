@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_render_invoices_for_year($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_render_invoices_for_year($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];

@@ -7,22 +7,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barkgj/datasink-library.git",
-                "reference": "95316102107a6ac335d0e3b9051d28cd9265bf44"
+                "reference": "b177d7dd0501709bcef4fa3a11b931bedcb330f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barkgj/datasink-library/zipball/95316102107a6ac335d0e3b9051d28cd9265bf44",
-                "reference": "95316102107a6ac335d0e3b9051d28cd9265bf44",
+                "url": "https://api.github.com/repos/barkgj/datasink-library/zipball/b177d7dd0501709bcef4fa3a11b931bedcb330f2",
+                "reference": "b177d7dd0501709bcef4fa3a11b931bedcb330f2",
                 "shasum": ""
             },
             "require": {
                 "barkgj/functions-library": "dev-main",
                 "php": ">=7.4"
             },
-            "time": "2023-01-19T11:33:20+00:00",
+            "time": "2023-01-25T20:06:10+00:00",
             "default-branch": true,
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "barkgj\\functions-library\\": "src/"
@@ -57,7 +57,7 @@
             "time": "2023-01-18T15:40:35+00:00",
             "default-branch": true,
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "barkgj\\": "src/"
@@ -94,7 +94,7 @@
             "time": "2023-01-19T11:34:06+00:00",
             "default-branch": true,
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "barkgj\\datasink\\": "src/vendor/barkgj/datasink-library/"

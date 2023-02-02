@@ -1,9 +1,9 @@
 <?php
 
-function brk_tasks_instance_do_send_theme_billing_reminder($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_theme_billing_reminder($then_that_item, $taskid, $taskinstanceid)
 {
 	//
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	$inputparameters = $instancemeta["inputparameters"];
 	
@@ -82,7 +82,7 @@ function brk_tasks_instance_do_send_theme_billing_reminder($then_that_item, $tas
 	$nonce_queryparameter = "_wpnonce";
 	
 	$should_do_it = false;
-	if (brk_tasks_isheadless())
+	if (nxs_tasks_isheadless())
 	{
 		$should_do_it = true;
 	}

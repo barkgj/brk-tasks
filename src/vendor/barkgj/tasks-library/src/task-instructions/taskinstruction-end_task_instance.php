@@ -1,8 +1,8 @@
 <?php
 
-function brk_tasks_instance_do_end_task_instance($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_end_task_instance($then_that_item, $taskid, $taskinstanceid)
 {
-	$instance = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instance = nxs_task_getinstance($taskid, $taskinstanceid);
 	if ($instance["isfound"] == false)
 	{
 		$result["result"] = "OK";
@@ -32,7 +32,7 @@ function brk_tasks_instance_do_end_task_instance($then_that_item, $taskid, $task
 	{
 		$action_url = "https://global.nexusthemes.com/api/1/prod/end-task-instance/?nxs=businessprocess-api&nxs_json_output_format=prettyprint&businessprocesstaskid={$taskid}&instance_context={$taskinstanceid}";
 	
-		$isheadless = brk_tasks_isheadless();
+		$isheadless = nxs_tasks_isheadless();
 		if ($isheadless)
 		{
 			$result["console"][] = "ENDING TASK INSTANCE";
@@ -56,7 +56,7 @@ function brk_tasks_instance_do_end_task_instance($then_that_item, $taskid, $task
 		{
 			$note_reference = "";
 			$note = "";
-			if (brk_tasks_willtriggerwakeparentwhenclosingtaskinstance($taskid, $taskinstanceid))
+			if (nxs_task_willtriggerwakeparentwhenclosingtaskinstance($taskid, $taskinstanceid))
 			{
 				$note_reference = "&#42;1";
 				$note = "<div style='display: inline-block; font-size: 70%; font-style: italic;'>{$note_reference}; this will WAKE the parent task instance</div>";

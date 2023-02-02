@@ -1,6 +1,6 @@
 <?php
 
-function brk_tasks_instance_do_assist_process_incoming_mails($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_process_incoming_mails($then_that_item, $taskid, $taskinstanceid)
 {
 	error_log("taskinstruction-assist_process_incoming_mails.php.465534.start");
 	
@@ -86,7 +86,7 @@ function brk_tasks_instance_do_assist_process_incoming_mails($then_that_item, $t
 	error_log("taskinstruction-assist_process_incoming_mails.php.465534:");
 	error_log(json_encode($active_conversations_result));
 	$count = count($active_conversations_result["conversations"]);
-	brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "count_items_pulled", $count);
+	nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "count_items_pulled", $count);
 
 	$result["result"] = "OK";
 	

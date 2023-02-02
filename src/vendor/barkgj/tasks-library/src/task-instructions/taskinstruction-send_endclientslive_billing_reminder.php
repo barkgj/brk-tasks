@@ -1,9 +1,9 @@
 <?php
 
-function brk_tasks_instance_do_send_endclientslive_billing_reminder($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_send_endclientslive_billing_reminder($then_that_item, $taskid, $taskinstanceid)
 {
 	//
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	
 	if ($state == "STARTED")
@@ -90,7 +90,7 @@ function brk_tasks_instance_do_send_endclientslive_billing_reminder($then_that_i
 		$enabler = md5($whatmakesthisunique);
 		
 		$doit = false;
-		if (brk_tasks_isheadless())
+		if (nxs_tasks_isheadless())
 		{
 			$doit = true;
 		}		

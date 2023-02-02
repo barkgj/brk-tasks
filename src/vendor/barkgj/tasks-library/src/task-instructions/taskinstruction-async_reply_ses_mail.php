@@ -1,8 +1,8 @@
 <?php
 
-function brk_tasks_instance_do_async_reply_ses_mail($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_async_reply_ses_mail($then_that_item, $taskid, $taskinstanceid)
 {
-	$inputparameters = brk_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
+	$inputparameters = nxs_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
 	
 	if ($inputparameters["async_reply"] == "sent")
 	{
@@ -44,7 +44,7 @@ function brk_tasks_instance_do_async_reply_ses_mail($then_that_item, $taskid, $t
 			die();
 		}
 		// set field to avoid double sending email
-		brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "async_reply", "sent");
+		nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, "async_reply", "sent");
 		
 		// create task 33
 		$createtaskid = 33;
@@ -56,7 +56,7 @@ function brk_tasks_instance_do_async_reply_ses_mail($then_that_item, $taskid, $t
 			"subject" => $inputparameters["subject_original_ticket"],
 			"body" => $inputparameters["custom_reply"],
 		);
-		$r = brk_tasks_createtaskinstance($createtaskid, "", $taskid, $taskinstanceid, "", $inputparametersnewinstance);
+		$r = nxs_tasks_createtaskinstance($createtaskid, "", $taskid, $taskinstanceid, "", $inputparametersnewinstance);
 		$newtaskinstanceid = $r["taskinstanceid"];
 		
 		$result["console"][] = "DONE; Async reply ses mail task instance {$newtaskinstanceid} created (33)";
@@ -66,8 +66,8 @@ function brk_tasks_instance_do_async_reply_ses_mail($then_that_item, $taskid, $t
 		return $result;
 	}
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
-	$inputparameters = brk_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
+	$inputparameters = nxs_tasks_gettaskinstancelookup($taskid, $taskinstanceid);
 	
 	$button_text = $then_that_item["button_text"];
 	if ($button_text == "")

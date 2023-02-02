@@ -2,6 +2,8 @@
 
 namespace barkgj\datasink;
 
+require_once __DIR__ . '/vendor/barkgj/functions-library/src/functions.php';
+
 use barkgj\functions;
 use barkgj\functions\filesystem;
 

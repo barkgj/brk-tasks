@@ -2,11 +2,11 @@
 
 require_once("/srv/generic/libraries-available/nxs-workflows/nxs-workflows.php");
 
-function brk_tasks_instance_do_assist_fixed_alternative_flow_of_previous_taskinstance($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_assist_fixed_alternative_flow_of_previous_taskinstance($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$state = $instancemeta["state"];
@@ -16,7 +16,7 @@ function brk_tasks_instance_do_assist_fixed_alternative_flow_of_previous_taskins
   if ($state == "STARTED")
   {
   	$message = $inputparameters["message"];
-  	$references = brk_tasks_getreferencedtaskinstances($message);
+  	$references = nxs_task_getreferencedtaskinstances($message);
   	if (count($references) > 0)
   	{
   		$result["console"][] = "<div style='background-color: #DDA0DD;'>begin of assist_fixed_alternative_flow_of_previous_taskinstance<br />it looks like this task instance was created as a response of the client to a mail sent by a previous task. Should you have the need to re-create an instance based on that previous task (for example  we need to receive a corrected password, user provides the corrected password<br />";
@@ -32,12 +32,12 @@ function brk_tasks_instance_do_assist_fixed_alternative_flow_of_previous_taskins
 				if ($ref_taskid == 33)
 				{
 					$ref_args = array();
-					$stacktrace = brk_tasks_getstacktrace($ref_taskid, $ref_taskinstanceid, $ref_args);
+					$stacktrace = nxs_task_getstacktrace($ref_taskid, $ref_taskinstanceid, $ref_args);
 					$stacktraceitem = $stacktrace[count($stacktrace) - 1];
 	
 					$createdby_taskid = $stacktraceitem["taskid"];
 					$createdby_taskinstanceid = $stacktraceitem["taskinstanceid"];
-					$title = brk_tasks_gettaskstitle($createdby_taskid);
+					$title = nxs_tasks_gettaskstitle($createdby_taskid);
 					
 					$result["console"][] = "hint: created instance of id: $createdby_taskid ($title) $createdby_taskinstanceid";
 					$ref_k_to_skip = array("message");
@@ -52,7 +52,7 @@ function brk_tasks_instance_do_assist_fixed_alternative_flow_of_previous_taskins
 						// $result["console"][] = do_shortcode("[nxs_p001_task_instruction type='render-copy-to-clipboard' label='{$ref_k}' value='{$ref_v}']");
 					}
 					
-					$workflow_state = brk_tasks_getworkflowsavailabilitystate_for_task($createdby_taskid);
+					$workflow_state = nxs_task_getworkflowsavailabilitystate_for_task($createdby_taskid);
 					if (false)
 					{
 						//

@@ -2,11 +2,11 @@
 
 require_once("/srv/generic/libraries-available/nxs-tasks/nxs-tasks.php");
 
-function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_pick_ixplatformentry($then_that_item, $taskid, $taskinstanceid)
 {
 	$marker = $then_that_item["marker"];
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$ixplatform_filter = $then_that_item["ixplatform_filter"];
@@ -17,7 +17,7 @@ function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $t
 		
 		if (nxs_stringcontains($ixplatform_filter, "{"))
 		{
-			$result["console"][] = "brk_tasks_instance_do_pick_ixplatformentry; err; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
+			$result["console"][] = "nxs_task_instance_do_pick_ixplatformentry; err; ixplatform_filter still has unreplaced placeholders; $ixplatform_filter";
 			$result["result"] = "OK";
 			return $result;
 		}
@@ -26,7 +26,7 @@ function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $t
 	$schema = $then_that_item["schema"];
 	if ($schema == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_pick_ixplatformentry; err; schema attribute not set";
+		$result["console"][] = "nxs_task_instance_do_pick_ixplatformentry; err; schema attribute not set";
 		$result["result"] = "OK";
 		return $result;
 	}
@@ -34,7 +34,7 @@ function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $t
 	$inputparameterfield = $then_that_item["inputparameterfield"];
 	if ($inputparameterfield == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_pick_ixplatformentry; err; inputparameterfield attribute not set";
+		$result["console"][] = "nxs_task_instance_do_pick_ixplatformentry; err; inputparameterfield attribute not set";
 		$result["result"] = "OK";
 		return $result;
 	}
@@ -42,7 +42,7 @@ function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $t
 	$humantitle_field = $then_that_item["humantitle_field"];
 	if ($humantitle_field == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_pick_ixplatformentry; err; humantitle_field attribute not set";
+		$result["console"][] = "nxs_task_instance_do_pick_ixplatformentry; err; humantitle_field attribute not set";
 		$result["result"] = "OK";
 		return $result;
 	}
@@ -51,7 +51,7 @@ function brk_tasks_instance_do_pick_ixplatformentry($then_that_item, $taskid, $t
 	$result["console"][] = "-----------";
 	$result["console"][] = do_shortcode("* [nxs_p001_task_instruction indent=1 type='open-ixplatform-table' schema='{$schema}']");
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$value = $inputparameters[$inputparameterfield];

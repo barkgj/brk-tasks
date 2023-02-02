@@ -5,7 +5,7 @@ function nxs_nonce_create()
 	
 }
 
-function brk_tasks_instance_do_sleep_task_instance($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_sleep_task_instance($then_that_item, $taskid, $taskinstanceid)
 {
 	$md5 = md5(json_encode($then_that_item));
 
@@ -18,7 +18,7 @@ function brk_tasks_instance_do_sleep_task_instance($then_that_item, $taskid, $ta
 	{
 		$result["console"][] = "SLEEPING TASK INSTANCE";
 		
-		$instance = brk_tasks_getinstance($taskid, $taskinstanceid);
+		$instance = nxs_task_getinstance($taskid, $taskinstanceid);
 		
 		$action_url = "https://global.nexusthemes.com/api/1/prod/sleep-task-instance/?nxs=businessprocess-api&nxs_json_output_format=prettyprint&taskid={$taskid}&taskinstanceid={$taskinstanceid}";
 	

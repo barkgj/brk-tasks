@@ -1,10 +1,10 @@
 <?php
 
-function brk_tasks_instance_do_translate_inputparameter_to_inputparameter($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_translate_inputparameter_to_inputparameter($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "TRANSLATING INPUT PARAMETER TO INPUT PARAMETER";
 	
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$inputparameters = $instancemeta["inputparameters"];
 	
 	$source_name = $then_that_item["source_name"];
@@ -51,7 +51,7 @@ function brk_tasks_instance_do_translate_inputparameter_to_inputparameter($then_
 	
 	// 
 	$destination_name = $then_that_item["destination_name"];
-	brk_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $destination_name, $value);
+	nxs_tasks_appendinputparameter_for_taskinstance($taskid, $taskinstanceid, $destination_name, $value);
 
 	$result["console"][] = "STORED VALUE $value as input parameter $destination_name";
 	$result["result"] = "OK";

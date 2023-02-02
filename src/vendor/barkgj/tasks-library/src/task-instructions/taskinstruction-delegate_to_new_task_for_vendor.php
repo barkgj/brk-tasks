@@ -1,17 +1,17 @@
 <?php
 
-function brk_tasks_instance_do_delegate_to_new_task_for_vendor($then_that_item, $taskid, $taskinstanceid)
+function nxs_task_instance_do_delegate_to_new_task_for_vendor($then_that_item, $taskid, $taskinstanceid)
 {
 	$result["console"][] = "STARTING DELEGATION TO NEW TASK FOR VENDOR";
 
-	$instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	$instancemeta = nxs_task_getinstance($taskid, $taskinstanceid);
 	$state = $instancemeta["state"];
 	$inputparameters = $instancemeta["inputparameters"];
 	$subject_original_ticket = $inputparameters["subject_original_ticket"];
 	$vendor_id = $inputparameters["vendor_id"];
 	if ($vendor_id == "")
 	{
-		$result["console"][] = "brk_tasks_instance_do_delegate_to_new_task_for_vendor; no vendor_id found?";
+		$result["console"][] = "nxs_task_instance_do_delegate_to_new_task_for_vendor; no vendor_id found?";
 	}
 	else
 	{
@@ -39,7 +39,7 @@ function brk_tasks_instance_do_delegate_to_new_task_for_vendor($then_that_item, 
 			return $result;
 		}
 		
-		$create_subresult = brk_tasks_createtaskinstance_byinvokingapi($messageshandledby_taskid, $inputparameters, $taskid, $taskinstanceid);
+		$create_subresult = nxs_tasks_createtaskinstance_byinvokingapi($messageshandledby_taskid, $inputparameters, $taskid, $taskinstanceid);
 		if ($create_subresult["result"] != "OK") 
 		{
 			return $create_subresult;
