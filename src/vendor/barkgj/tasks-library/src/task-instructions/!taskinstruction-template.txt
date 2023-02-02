@@ -1,0 +1,21 @@
+<?php
+
+function brk_tasks_instance_do_{{shortcode_type}}($then_that_item, $taskid, $taskinstanceid)
+{
+	// $marker = $then_that_item["marker"];
+	
+	// $instancemeta = brk_tasks_getinstance($taskid, $taskinstanceid);
+	// $inputparameters = $instancemeta["inputparameters"];
+	
+	// $state = $instancemeta["state"];
+	
+  $result = array();
+  
+  //
+  //
+  //
+  
+  $result["result"] = "OK";
+  
+  return $result;
+}

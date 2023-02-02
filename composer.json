@@ -1,0 +1,18 @@
+{
+    "name": "barkgj/wp-tasks",
+    "description": "A wp plugin to manage and execute tasks",
+    "require": {
+        "php": ">=7.4",
+        "barkgj/functions-library": "dev-main",
+        "barkgj/datasink-library": "dev-main",
+        "barkgj/tasks-library": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+          "barkgj\\datasink\\": "src/vendor/barkgj/datasink-library/"
+        }
+      },
+    "config": {
+        "vendor-dir": "src/vendor"
+    }
+}

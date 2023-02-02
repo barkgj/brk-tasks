@@ -1,0 +1,114 @@
+{
+    "packages": [
+        {
+            "name": "barkgj/datasink-library",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barkgj/datasink-library.git",
+                "reference": "95316102107a6ac335d0e3b9051d28cd9265bf44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barkgj/datasink-library/zipball/95316102107a6ac335d0e3b9051d28cd9265bf44",
+                "reference": "95316102107a6ac335d0e3b9051d28cd9265bf44",
+                "shasum": ""
+            },
+            "require": {
+                "barkgj/functions-library": "dev-main",
+                "php": ">=7.4"
+            },
+            "time": "2023-01-19T11:33:20+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "barkgj\\functions-library\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A PHP library to CRUD entities, urls and apis",
+            "support": {
+                "issues": "https://github.com/barkgj/datasink-library/issues",
+                "source": "https://github.com/barkgj/datasink-library/tree/main"
+            },
+            "install-path": "../barkgj/datasink-library"
+        },
+        {
+            "name": "barkgj/functions-library",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barkgj/functions-library.git",
+                "reference": "3de4987b99ebd9ccb82638ce8eaecb19016ee774"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barkgj/functions-library/zipball/3de4987b99ebd9ccb82638ce8eaecb19016ee774",
+                "reference": "3de4987b99ebd9ccb82638ce8eaecb19016ee774",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "time": "2023-01-18T15:40:35+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "barkgj\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Set of basic functions used by other barkgj projects",
+            "support": {
+                "issues": "https://github.com/barkgj/functions-library/issues",
+                "source": "https://github.com/barkgj/functions-library/tree/main"
+            },
+            "install-path": "../barkgj/functions-library"
+        },
+        {
+            "name": "barkgj/tasks-library",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/barkgj/tasks-library.git",
+                "reference": "2d6fcf1552944dcad387739301d43384d4ab529f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/barkgj/tasks-library/zipball/2d6fcf1552944dcad387739301d43384d4ab529f",
+                "reference": "2d6fcf1552944dcad387739301d43384d4ab529f",
+                "shasum": ""
+            },
+            "require": {
+                "barkgj/datasink-library": "dev-main",
+                "barkgj/functions-library": "dev-main",
+                "php": ">=7.4"
+            },
+            "time": "2023-01-19T11:34:06+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "barkgj\\datasink\\": "src/vendor/barkgj/datasink-library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "A PHP library to create, manage and execute tasks",
+            "support": {
+                "issues": "https://github.com/barkgj/tasks-library/issues",
+                "source": "https://github.com/barkgj/tasks-library/tree/main"
+            },
+            "install-path": "../barkgj/tasks-library"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

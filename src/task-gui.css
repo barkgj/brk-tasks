@@ -1,0 +1,124 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+
+
+body { font-family: droid sans; line-height: 1.5em; padding: 0 2em; }
+.no-br br { display: none }
+.bpm-title {
+	display: inline-block;
+	padding: 0 1em;
+	background-color: #ccc;
+	border-radius: 3px;
+	border: 1px solid gray;
+	font-weight: bold;
+}
+.bpm-description {
+	padding: 0 1em;
+	background-color: #f2f2f2;
+	border-radius: 3px;
+	border: 1px solid gray;
+}
+.bpm-description ul li {
+	padding: 0 1em;
+	list-style: inside circle;
+	line-height: 2em;
+}
+
+.taskinstruction {
+    display: inline-block;
+}
+
+
+select[multiple] {
+  background:none;
+  width:auto;
+  height:auto;
+  padding:0;
+  margin:0;
+  border-width: 2px;
+  border-style: inset;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+
+.table-oddeven thead 
+{
+	opacity: 0.5;
+}
+.table-oddeven tr:nth-child(odd){ 
+	background: #b8d1f3;
+}
+.table-oddeven tr:nth-child(even){
+	background: #dae5f4;
+}
+.table-oddeven
+{
+	cellpadding: 3px;
+}
+
+.table-oddeven td
+{
+padding-left: 3px;
+padding-right: 3px;
+}
+
+.sidenote
+{
+opacity: 0.3;
+font-style: italic;
+font-size: 70%
+}
+
+h1
+{
+line-height: 1em;
+}
+
+.nxs-ip 
+{
+margin:2px; 
+padding:2px; 
+border-color: red; 
+border-top: 0px;
+border-right: 0px;
+border-bottom: 0px;
+border-left: 10px;
+border-style: solid;
+}
+
+.nxs-past
+{
+border-color: #DDD;
+background-color: #eee; 
+}
+
+.nxs-present
+{
+border-color: #0A0;
+}
+
+.taskinstruction
+{
+	/* text-overflow: clip; */
+	white-space: nowrap;
+}
