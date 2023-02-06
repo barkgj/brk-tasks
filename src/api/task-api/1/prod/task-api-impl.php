@@ -32,14 +32,13 @@
 // https://tasks.example.org/api/1/prod/run-task-instance-headless/?nxs=task-api&nxs_json_output_format=prettyprint&taskid=593&taskinstanceid=D1532527-CF55-4BEA-6041-0BD1CCE401D6
 // https://tasks.example.org/api/1/prod/run-task-instances-batch-headless/?nxs=task-api&nxs_json_output_format=prettyprint&taskid=593&taskinstanceids=D1532527-CF55-4BEA-6041-0BD1CCE401D6;D1532527-CF55-4BEA-6041-0BD1CCE401D5
 
+// https://tasks.example.org/api/1/prod/create-task/?brk=task-api&nxs_json_output_format=prettyprint&taskmeta_id=1&taskrecipe=hello world
+
+
 use barkgj\functions;
 use barkgj\tasks\tasks;
 
-// todo; fix autoloader of composer so this is not needed...
-require_once dirname(__DIR__, 4) . '/vendor/barkgj/datasink-library/src/datasink-entity.php';
-require_once dirname(__DIR__, 4) . '/vendor/barkgj/functions-library/src/functions.php';
-require_once dirname(__DIR__, 4) . '/vendor/barkgj/functions-library/src/filesystem.php';
-require_once dirname(__DIR__, 4) . '/vendor/barkgj/tasks-library/src/tasks.php';
+
 
 // more than likely values submitted can contains slashes, which would be escaped by the webserver
 functions::ensureslashesstripped();
@@ -183,7 +182,44 @@ if (true)
 		
 		functions::webmethod_return_ok($result);
 	}
+	else if ($service == "create-task")
+	{
+		$args = array();
+		$prefix = "args_";
+		foreach ($_REQUEST as $key => $val)
+		{
+			if (functions::stringstartswith($key, $prefix))
+			{
+				$args_key = $key;
+				$args_key = str_replace($prefix, "", $args_key);
+				// 
+				$args[$args_key] = $val;
+			}
+		}
 
+		$taskmeta = array("id" => $_REQUEST["id"]);
+		$prefix = "taskmeta_";
+		foreach ($_REQUEST as $key => $val)
+		{
+			if (functions::stringstartswith($key, $prefix))
+			{
+				$taskmeta_key = $key;
+				$taskmeta_key = str_replace($prefix, "", $taskmeta_key);
+				// 
+				$taskmeta[$taskmeta_key] = $val;
+			}
+		}
+		
+		$taskrecipe = $_REQUEST["taskrecipe"];
+
+		if (!isset($taskmeta["id"]))
+		{
+			functions::throw_nack("taskmeta_id required");
+		}
+
+		$createresult = tasks::createtask($args, $taskmeta, $taskrecipe);
+		functions::webmethod_return_ok($createresult);
+	}
 
 	/*
 	// MARKER 674547563354

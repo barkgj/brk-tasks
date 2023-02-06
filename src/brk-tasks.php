@@ -26,8 +26,9 @@ error_reporting(E_ERROR | E_PARSE);
 $loader = require_once __DIR__ . '/vendor/autoload.php';
 
 // todo; fix autoloader of composer so this is not needed...
-require_once __DIR__ . '/vendor/barkgj/datasink-library/src/datasink-entity.php';
+require_once __DIR__ . '/vendor/barkgj/functions-library/src/functions.php';
 require_once __DIR__ . '/vendor/barkgj/functions-library/src/filesystem.php';
+require_once __DIR__ . '/vendor/barkgj/datasink-library/src/datasink-entity.php';
 require_once __DIR__ . '/vendor/barkgj/tasks-library/src/tasks.php';
 
 use barkgj\functions;
@@ -1452,8 +1453,6 @@ add_action( 'init', 'brk_tasks_process_task_request', 1000, 0);
 function brk_tasks_process_task_request()
 {
 	$brk = $_REQUEST["brk"];
-	var_dump($brk);
-	
 	if ($_REQUEST["brk"] != null && functions::stringendswith($_REQUEST["brk"], "-api"))
 	{
 		require_once("brk-api-dispatcher.php");

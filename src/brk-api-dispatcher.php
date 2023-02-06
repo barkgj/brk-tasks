@@ -21,7 +21,7 @@ if ($uripieces[1] == "api")
 	require_once($implementationpath);
 
 	// if we reach this stage, the api didn't die
-	functions::throw_nack("err; api dispatcher Error #426346 $implementationpath $currenturi");
+	functions::throw_nack("err; api dispatcher Error #426346 (v2) implementationpath:{$implementationpath} currenturi:{$currenturi}");
 }
 else
 {
